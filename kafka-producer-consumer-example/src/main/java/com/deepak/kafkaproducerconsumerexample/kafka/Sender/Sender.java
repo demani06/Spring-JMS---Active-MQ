@@ -23,6 +23,7 @@ public class Sender {
     private String topic;
 
     public void send(Customer data){
+        System.out.println("~~~~~~~~~~~~in Send methood");
         LOG.info("sending data='{}' to topic='{}'", data, topic);
 
         Message<Customer> message = MessageBuilder

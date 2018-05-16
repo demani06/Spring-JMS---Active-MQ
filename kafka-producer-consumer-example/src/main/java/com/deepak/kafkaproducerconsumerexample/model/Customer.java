@@ -1,19 +1,28 @@
 package com.deepak.kafkaproducerconsumerexample.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Customer {
 
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
+    private String description;
 
+    public Customer(String firstName, String lastName, String description) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.description = description;
+    }
     public Customer() {
     }
 
-    public Customer(int id) {
+    public Customer(Long id) {
         this.id = id;
     }
 
-    public Customer(int id, String firstName, String lastName) {
+    public Customer(Long id, String firstName, String lastName) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -28,11 +37,11 @@ public class Customer {
                 '}';
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
