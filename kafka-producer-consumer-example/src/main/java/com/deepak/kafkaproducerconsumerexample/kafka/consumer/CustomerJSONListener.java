@@ -4,21 +4,26 @@ import com.deepak.kafkaproducerconsumerexample.model.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
-import org.springframework.messaging.MessageHeaders;
-import org.springframework.messaging.handler.annotation.Headers;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
-@Service
-public class CustomerListener {
+import java.util.concurrent.CountDownLatch;
 
-    private static final Logger LOG = LoggerFactory.getLogger(CustomerListener.class);
+@Service
+public class CustomerJSONListener {
+
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerJSONListener.class);
 
     @KafkaListener(topics = "${app.topic.example}")
     public void processMessage(Customer customer) {
         System.out.println("received content = " + customer);
+        latch.countDown();
     }
 
+    private CountDownLatch latch = new CountDownLatch(1);
+
+    public CountDownLatch getLatch() {
+        return latch;
+    }
 
    /* public void receive(@Payload Customer data,
                         @Headers MessageHeaders headers) {

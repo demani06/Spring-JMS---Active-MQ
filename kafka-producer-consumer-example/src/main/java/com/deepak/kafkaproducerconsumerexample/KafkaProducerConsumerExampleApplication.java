@@ -1,6 +1,6 @@
 package com.deepak.kafkaproducerconsumerexample;
 
-import com.deepak.kafkaproducerconsumerexample.kafka.Sender.Sender;
+import com.deepak.kafkaproducerconsumerexample.kafka.Sender.CustomerJSONSender;
 import com.deepak.kafkaproducerconsumerexample.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -18,7 +18,7 @@ public class KafkaProducerConsumerExampleApplication implements CommandLineRunne
 	}
 
 	@Autowired
-	private Sender sender;
+	private CustomerJSONSender sender;
 
 	@Override
 	public void run(String... args) throws Exception {

@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-public class SenderConfig {
+public class CustomerJSONSenderConfig {
 
     @Value("${spring.kafka.bootstrap-servers}")
     private String bootstrapServers;

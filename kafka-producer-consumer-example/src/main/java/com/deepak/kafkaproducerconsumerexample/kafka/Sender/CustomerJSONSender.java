@@ -12,9 +12,9 @@ import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class Sender {
+public class CustomerJSONSender {
 
-    private static final Logger LOG = LoggerFactory.getLogger(Sender.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CustomerJSONSender.class);
 
     @Autowired
     private KafkaTemplate<String, Customer> kafkaTemplate;

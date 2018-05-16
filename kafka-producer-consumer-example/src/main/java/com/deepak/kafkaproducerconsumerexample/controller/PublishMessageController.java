@@ -1,17 +1,15 @@
 package com.deepak.kafkaproducerconsumerexample.controller;
 
-import com.deepak.kafkaproducerconsumerexample.kafka.Sender.Sender;
+import com.deepak.kafkaproducerconsumerexample.kafka.Sender.CustomerJSONSender;
 import com.deepak.kafkaproducerconsumerexample.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -19,7 +17,7 @@ import java.util.function.Consumer;
 public class PublishMessageController {
 
     @Autowired
-    Sender sender;
+    CustomerJSONSender sender;
 
     @Autowired
     private RestTemplate restTemplate;
