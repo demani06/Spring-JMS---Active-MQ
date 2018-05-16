@@ -10,21 +10,26 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.KafkaListenerEndpointRegistry;
 import org.springframework.kafka.listener.MessageListenerContainer;
+import org.springframework.kafka.test.context.EmbeddedKafka;
 import org.springframework.kafka.test.rule.KafkaEmbedded;
 import org.springframework.kafka.test.utils.ContainerTestUtils;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@EnableKafka
 @RunWith(SpringRunner.class)
 @SpringBootTest
+@EmbeddedKafka(topics = "customer.topic", brokerProperties = {"listeners=PLAINTEXT://localhost:9092"})
 public class KafkaProducerConsumerExampleApplicationTests {
 
-	@ClassRule
-	public static KafkaEmbedded kafkaEmbedded = new KafkaEmbedded(1, true, "customer.topic");
+    @Autowired
+    KafkaEmbedded kafkaEmbedded;
 
 	@Autowired
 	private CustomerJSONSender customerJSONSender;
@@ -34,6 +39,7 @@ public class KafkaProducerConsumerExampleApplicationTests {
 
 	@Autowired
 	private KafkaListenerEndpointRegistry kafkaListenerEndpointRegistry;
+
 
 	@Before
 	public void setUp() throws Exception {
@@ -45,6 +51,7 @@ public class KafkaProducerConsumerExampleApplicationTests {
 		}
 	}
 
+
 	@Test
 	public void testRecieve() throws Exception {
 		Customer customer = new Customer(3L, "Tom", "Hanks");
@@ -53,7 +60,7 @@ public class KafkaProducerConsumerExampleApplicationTests {
 
 
 		customerJSONListener.getLatch().await(1000, TimeUnit.MILLISECONDS);
-		Java6Assertions.assertThat(customerJSONListener.getLatch().getCount()).isEqualTo(0);
+		assertThat(customerJSONListener.getLatch().getCount()).isEqualTo(0);
 
 	}
 }

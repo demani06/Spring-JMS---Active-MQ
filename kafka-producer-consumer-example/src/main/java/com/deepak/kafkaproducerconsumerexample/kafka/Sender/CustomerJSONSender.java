@@ -23,15 +23,14 @@ public class CustomerJSONSender {
     private String topic;
 
     public void send(Customer data){
-        System.out.println("~~~~~~~~~~~~in Send methood");
         LOG.info("sending data='{}' to topic='{}'", data, topic);
 
-        Message<Customer> message = MessageBuilder
+        /*Message<Customer> message = MessageBuilder
                 .withPayload(data)
                 .setHeader(KafkaHeaders.TOPIC, topic)
-                .build();
+                .build();*/
 
-        kafkaTemplate.send(message);
+        kafkaTemplate.send(topic, data);
     }
 
 }

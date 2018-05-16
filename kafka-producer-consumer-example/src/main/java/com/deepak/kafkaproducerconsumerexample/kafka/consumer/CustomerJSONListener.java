@@ -4,6 +4,7 @@ import com.deepak.kafkaproducerconsumerexample.model.Customer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.CountDownLatch;
@@ -14,7 +15,7 @@ public class CustomerJSONListener {
     private static final Logger LOG = LoggerFactory.getLogger(CustomerJSONListener.class);
 
     @KafkaListener(topics = "${app.topic.example}")
-    public void processMessage(Customer customer) {
+    public void processMessage(Customer customer, @Headers ) {
         System.out.println("received content = " + customer);
         latch.countDown();
     }
